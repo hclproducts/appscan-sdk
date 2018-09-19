@@ -1,6 +1,6 @@
 /**
  * © Copyright IBM Corporation 2016.
- * © Copyright HCL Technologies Ltd. 2017. 
+ * © Copyright HCL Technologies Ltd. 2017,2018. 
  * LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
  */
 
@@ -55,6 +55,7 @@ public interface CoreConstants {
 	String API_SCAN						= API_ENV + "/%s";										//$NON-NLS-1$
 	String API_SCANNER					= API_ENV + "/Scans/%s";								//$NON-NLS-1$
 	String API_SCANS					= API_ENV + "/Scans";									//$NON-NLS-1$
+	String API_NONCOMPLIANT_ISSUES 		= API_ENV + "/Scans/%s/NonCompliantIssues";				//$NON-NLS-1$
 	String API_SCANS_REPORT				= API_ENV + "/Scans/%s/Report/%s";						//$NON-NLS-1$
 	String API_SCX						= "SCX";												//$NON-NLS-1$
 	String API_SACLIENT_DOWNLOAD		= "/api/%s/StaticAnalyzer/SAClientUtil?os=%s"; 			//$NON-NLS-1$
