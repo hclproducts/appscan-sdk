@@ -9,12 +9,13 @@ package com.hcl.appscan.sdk.scanners.sast;
 
 public interface SASTConstants {
 
-	String APPSCAN_INSTALL_DIR			= "APPSCAN_INSTALL_DIR";			//$NON-NLS-1$
-	String APPSCAN_IRGEN_CLIENT         = "APPSCAN_IRGEN_CLIENT";			//$NON-NLS-1$
+	String APPSCAN_IRGEN_CLIENT         	= "APPSCAN_IRGEN_CLIENT";			//$NON-NLS-1$
 	String ARSA_FILE_ID					= "ARSAFileId";						//$NON-NLS-1$
 	String WIN_SCRIPT					= "appscan.bat";					//$NON-NLS-1$
 	String UNIX_SCRIPT					= "appscan.sh";						//$NON-NLS-1$
-
+	String VECTOR_WIN_SCRIPT				= "vector.bat";					//$NON-NLS-1$
+	String VECTOR_UNIX_SCRIPT			= "vector.sh";						//$NON-NLS-1$	
+	
 	String IRX_EXTENSION				= ".irx";							//$NON-NLS-1$
 	String SAST							= "Static Analyzer";				//$NON-NLS-1$
 	String STATIC_ANALYZER				= "StaticAnalyzer";					//$NON-NLS-1$

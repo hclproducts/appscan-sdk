@@ -12,7 +12,8 @@ import java.util.Locale;
 
 public class SystemUtil {
 
-	private static final String DEFAULT_SERVER = "https://appscan.ibmcloud.com"; //$NON-NLS-1$
+	private static final String VECTOR_SERVER = "https://cloud.appsechcl.com/"; //$NON-NLS-1$
+	private static final String ASOC_SERVER = "https://appscan.ibmcloud.com"; //$NON-NLS-1$
 	private static final String TIMESTAMP_FORMAT = "yyyy-MM-dd_HH-mm-ss"; //$NON-NLS-1$
 			
 	/** Gets a timestamp using the default format.
@@ -105,7 +106,9 @@ public class SystemUtil {
 	public static String getDefaultServer() {
 		setSystemProperties();
 		String server = System.getProperty("BLUEMIX_SERVER"); //$NON-NLS-1$
-		return server != null ? server : DEFAULT_SERVER;
+		if(server == null)
+			server = isVector() ? VECTOR_SERVER : ASOC_SERVER;
+		return server;
 	}
 	
 	/**
@@ -115,5 +118,9 @@ public class SystemUtil {
 	 */
 	public static String getLocale() {
 		return Locale.getDefault().toString().replace('_', '-'); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+	
+	public static boolean isVector() {
+		return System.getProperty("Vector") != null;
 	}
 }

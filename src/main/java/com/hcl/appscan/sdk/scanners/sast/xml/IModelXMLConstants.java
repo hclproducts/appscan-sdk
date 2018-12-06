@@ -8,6 +8,7 @@ package com.hcl.appscan.sdk.scanners.sast.xml;
 
 public interface IModelXMLConstants {
 
+	String VECTOR_CONFIG			= "vector-config";			//$NON-NLS-1$
 	String APPSCAN_CONFIG			= "appscan-config";			//$NON-NLS-1$
 	String DOT_XML					= ".xml";					//$NON-NLS-1$
 	

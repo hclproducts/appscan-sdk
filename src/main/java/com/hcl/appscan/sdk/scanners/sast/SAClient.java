@@ -28,9 +28,11 @@ import com.hcl.appscan.sdk.utils.SystemUtil;
 
 public class SAClient implements SASTConstants {
 
-	private static final File DEFAULT_INSTALL_DIR = new File(System.getProperty("user.home"), ".appscan"); //$NON-NLS-1$ //$NON-NLS-2$
+	private static final File DEFAULT_INSTALL_DIR = new File(System.getProperty("user.home")); //$NON-NLS-1$
 	private static final String SACLIENT = "SAClientUtil"; //$NON-NLS-1$
 	private static final String VERSION_INFO = "version.info"; //$NON-NLS-1$
+	private static final String DOT_VECTOR = ".staticanalyzer"; //$NON-NLS-1$
+	private static final String DOT_APPSCAN = ".appscan"; //$NON-NLS-1$
 	
 	private IProgress m_progress;
 	private ProcessBuilder m_builder;
@@ -43,7 +45,12 @@ public class SAClient implements SASTConstants {
 	public SAClient(IProgress progress) {
 		m_progress = progress;
 		String install = System.getProperty(CoreConstants.SACLIENT_INSTALL_DIR);
-		m_installDir = install == null ? DEFAULT_INSTALL_DIR : new File(install);
+		if(install == null) {
+			String dir = SystemUtil.isVector() ? DOT_VECTOR : DOT_APPSCAN; //$NON-NLS-1$ //$NON-NLS-2$
+			m_installDir = new File(DEFAULT_INSTALL_DIR, dir);
+		}
+		else
+			m_installDir = new File(install);
 	}
 	
 	/**
@@ -117,9 +124,9 @@ public class SAClient implements SASTConstants {
 	}
 	
 	/**
-	 * Gets the absolute path to the "appscan" script for running the IRGen process, downloading the package if it's
+	 * Gets the absolute path to the client script for running the IRGen process, downloading the package if it's
 	 * not found or if the current version is out of date.
-	 * @return The absolute path to the "appscan" script.
+	 * @return The absolute path to the client script.
 	 * @throws IOException If an error occurs.
 	 * @throws ScannerException If an error occurs getting the client.
 	 */
@@ -159,7 +166,10 @@ public class SAClient implements SASTConstants {
 	}
 	
 	private String getScriptName() {
-		return SystemUtil.isWindows() ? WIN_SCRIPT : UNIX_SCRIPT;
+		if(SystemUtil.isVector())
+			return SystemUtil.isWindows() ? VECTOR_WIN_SCRIPT : VECTOR_UNIX_SCRIPT;
+		else
+			return SystemUtil.isWindows() ? WIN_SCRIPT : UNIX_SCRIPT;
 	}
 	
 	private boolean shouldUpdateClient() throws IOException {

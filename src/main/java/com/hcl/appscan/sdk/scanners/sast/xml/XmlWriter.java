@@ -17,6 +17,7 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 
 import com.hcl.appscan.sdk.scanners.sast.targets.ISASTTarget;
+import com.hcl.appscan.sdk.utils.SystemUtil;
 
 public class XmlWriter extends ModelWriter 
 implements	IModelXMLConstants 
@@ -24,7 +25,7 @@ implements	IModelXMLConstants
 
 	private DOMWriter m_config;  
 	private String m_configOutputDirectory = null;
-	private String m_configFileName = APPSCAN_CONFIG + DOT_XML;
+	private String m_configFileName = SystemUtil.isVector() ? VECTOR_CONFIG + DOT_XML : APPSCAN_CONFIG + DOT_XML;
 
 	@Override
 	public void initWriters(File directory) throws IOException {
