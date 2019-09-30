@@ -69,6 +69,7 @@ public interface CoreConstants {
 	String SACLIENT_INSTALL_DIR			= "SAClientInstall";									//$NON-NLS-1$
 	
 	String RUNNING						= "Running";											//$NON-NLS-1$
+	String INQUEUE 						= "InQueue"; 											//$NON-NLS-1$
 	String READY						= "Ready";												//$NON-NLS-1$
 	String FAILED						= "Failed";												//$NON-NLS-1$
 	
