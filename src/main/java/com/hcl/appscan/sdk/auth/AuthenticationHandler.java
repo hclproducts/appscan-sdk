@@ -30,7 +30,7 @@ public class AuthenticationHandler implements CoreConstants {
 	}
 	
 	/**
-	 * Authenticates a user with the IBM Application Security on Cloud service using a username and password.
+	 * Authenticates a user with the HCL AppScan on Cloud service using a username and password.
 	 * @param username The username.
 	 * @param password The password.
 	 * @param persist True to persist the credentials.

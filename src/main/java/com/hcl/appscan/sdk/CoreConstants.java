@@ -23,7 +23,7 @@ public interface CoreConstants {
 	String SCANNER_TYPE					= "type";												//$NON-NLS-1$
 	String STATUS						= "Status";												//$NON-NLS-1$
 	String TARGET						= "target";												//$NON-NLS-1$
-        String OPEN_SOURCE_ONLY                                 = "openSourceOnly";                                                                     //$NON-NLS-1$
+	String OPEN_SOURCE_ONLY             = "openSourceOnly";                                     //$NON-NLS-1$
 	String VERSION_NUMBER				= "VersionNumber";										//$NON-NLS-1$
 
 	String BINDING_ID					= "Bindingid";											//$NON-NLS-1$
@@ -43,7 +43,6 @@ public interface CoreConstants {
 	String API_ENV						= "/api/v2";				 							//$NON-NLS-1$
 	String API_BLUEMIX					= "Bluemix";					 						//$NON-NLS-1$
 	String API_BLUEMIX_LOGIN 			= API_ENV + "/Account/BluemixLogin";					//$NON-NLS-1$
-	String API_IBM_LOGIN 				= API_ENV + "/Account/IBMIdLogin";						//$NON-NLS-1$
 	String API_KEY_LOGIN				= API_ENV + "/Account/ApiKeyLogin";						//$NON-NLS-1$
 	String API_LOGOUT					= API_ENV + "/Account/Logout";							//$NON-NLS-1$
 	String API_APPS						= API_ENV + "/Apps"; 									//$NON-NLS-1$
@@ -58,9 +57,9 @@ public interface CoreConstants {
 	String API_SCANS					= API_ENV + "/Scans";									//$NON-NLS-1$
 	String API_NONCOMPLIANT_ISSUES 		= API_ENV + "/Scans/%s/NonCompliantIssues";				//$NON-NLS-1$
 	String API_SCANS_REPORT				= API_ENV + "/Scans/%s/Report/%s";						//$NON-NLS-1$
-	String API_SCX						= "SCX";                                                               //$NON-NLS-1$
-        String API_REPORT_SELECTED_ISSUES       = API_ENV + "/Reports/Security/%s/%s";					//$NON-NLS-1$
-        String API_DOWNLOAD_REPORT              = API_ENV + "/Reports/Download/%s";						//$NON-NLS-1$
+	String API_SCX						= "SCX";                                                //$NON-NLS-1$
+	String API_REPORT_SELECTED_ISSUES   = API_ENV + "/Reports/Security/%s/%s";					//$NON-NLS-1$
+	String API_DOWNLOAD_REPORT          = API_ENV + "/Reports/Download/%s";						//$NON-NLS-1$
 	String API_SACLIENT_DOWNLOAD		= "/api/%s/StaticAnalyzer/SAClientUtil?os=%s"; 			//$NON-NLS-1$
 	String API_SACLIENT_VERSION			= "/api/%s/StaticAnalyzer/SAClientUtil?os=%s&meta=%s"; 	//$NON-NLS-1$
 	String API_KEY_PATH					= "/api/ideclientuilogin";								//$NON-NLS-1$
@@ -88,7 +87,7 @@ public interface CoreConstants {
 	String ERROR_DOWNLOADING_CLIENT 	= "error.download.client";								//$NON-NLS-1$
 	String ERROR_GETTING_DETAILS		= "error.getting.details";								//$NON-NLS-1$
 	String ERROR_GETTING_RESULT			= "error.getting.result";								//$NON-NLS-1$
-        String ERROR_GENERATING_REPORT                  = "error.generating.report";                                                            //$NON-NLS-1$
+	String ERROR_GENERATING_REPORT      = "error.generating.report";                            //$NON-NLS-1$
 	String ERROR_INVALID_APP			= "error.invalid.app";									//$NON-NLS-1$	
 	String ERROR_INVALID_OPTIONS		= "error.invalid.opts";									//$NON-NLS-1$
 	String ERROR_LOADING_APPS			= "error.loading.apps";									//$NON-NLS-1$

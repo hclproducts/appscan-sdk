@@ -4,9 +4,9 @@
   <artifactId>appscan.sdk</artifactId>
   <version>1.0.10-SNAPSHOT</version>
 
-  <name>IBM Application Security on Cloud SDK</name>
-  <description>SDK for interacting with IBM Application Security on Cloud</description>
-  <url>https://appscan.ibmcloud.com</url>
+  <name>HCL AppScan on Cloud SDK</name>
+  <description>SDK for interacting with HCL AppScan on Cloud</description>
+  <url>https://cloud.appscan.com</url>
   
   <licenses>
   	<license>
