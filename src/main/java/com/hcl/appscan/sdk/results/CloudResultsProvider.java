@@ -210,7 +210,7 @@ public class CloudResultsProvider implements IResultsProvider, Serializable, Cor
 			return FAILED;
 		}
 	
-		String request_url = authProvider.getServer() + String.format(API_REPORTS_STATUS, reportId);
+		String request_url = authProvider.getServer() + String.format(API_REPORT_STATUS, reportId);
 		Map<String, String> request_headers = authProvider.getAuthorizationHeader(true);
 		request_headers.put(CONTENT_LENGTH, "0"); //$NON-NLS-1$
 	
