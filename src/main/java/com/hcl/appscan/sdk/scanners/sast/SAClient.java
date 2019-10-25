@@ -162,6 +162,12 @@ public class SAClient implements SASTConstants {
 		return SystemUtil.isWindows() ? WIN_SCRIPT : UNIX_SCRIPT;
 	}
 	
+	public boolean majorVersionChanged() throws IOException {
+		String serverMajorVersion = ServiceUtil.getSAClientVersion().substring(0, 1);
+		String localMajorVersion = getLocalClientVersion().substring(0, 1);
+		return localMajorVersion.equals(serverMajorVersion) ? true : false;
+	}
+
 	public boolean shouldUpdateClient() throws IOException {
 		String serverVersion = ServiceUtil.getSAClientVersion();
 		String localVersion = getLocalClientVersion();
