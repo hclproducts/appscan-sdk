@@ -50,7 +50,7 @@ public class CloudApplicationProvider implements IApplicationProvider, CoreConst
 		Map<String, String> headers = m_authProvider.getAuthorizationHeader(true);
 		headers.putAll(Collections.singletonMap("range", "items=0-999999")); //$NON-NLS-1$ //$NON-NLS-2$
 		
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_authProvider.getProxy());
 		
 		try {
 			HttpResponse response = client.get(url, headers, null);

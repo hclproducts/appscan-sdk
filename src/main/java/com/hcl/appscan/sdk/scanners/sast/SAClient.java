@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -35,15 +36,25 @@ public class SAClient implements SASTConstants {
 	private IProgress m_progress;
 	private ProcessBuilder m_builder;
 	private File m_installDir;
+	private Proxy m_proxy;
 	
 	public SAClient() {
-		this(new DefaultProgress());
+		this(new DefaultProgress(), Proxy.NO_PROXY);
+	}
+	
+	public SAClient(Proxy proxy) {
+		this(new DefaultProgress(), proxy);
 	}
 	
 	public SAClient(IProgress progress) {
+		this(progress, Proxy.NO_PROXY);
+	}
+	
+	public SAClient(IProgress progress, Proxy proxy) {
 		m_progress = progress;
 		String install = System.getProperty(CoreConstants.SACLIENT_INSTALL_DIR);
 		m_installDir = install == null ? DEFAULT_INSTALL_DIR : new File(install);
+		m_proxy = proxy;
 	}
 	
 	/**
@@ -141,7 +152,7 @@ public class SAClient implements SASTConstants {
 			clientZip.delete();
 		
 		try {
-			ServiceUtil.getSAClientUtil(clientZip);
+			ServiceUtil.getSAClientUtil(clientZip, m_proxy);
 		} catch(OutOfMemoryError e) {
 			throw new ScannerException(Messages.getMessage(DOWNLOAD_OUT_OF_MEMORY));
 		} catch(IOException e) {
@@ -163,13 +174,13 @@ public class SAClient implements SASTConstants {
 	}
 	
 	public boolean majorVersionChanged() throws IOException {
-		String serverMajorVersion = ServiceUtil.getSAClientVersion().substring(0, 1);
+		String serverMajorVersion = ServiceUtil.getSAClientVersion(m_proxy).substring(0, 1);
 		String localMajorVersion = getLocalClientVersion().substring(0, 1);
 		return !localMajorVersion.equals(serverMajorVersion);
 	}
 	
 	public boolean shouldUpdateClient() throws IOException {
-		String serverVersion = ServiceUtil.getSAClientVersion();
+		String serverVersion = ServiceUtil.getSAClientVersion(m_proxy);
 		String localVersion = getLocalClientVersion();
 
 		if(compareVersions(localVersion, serverVersion)) {

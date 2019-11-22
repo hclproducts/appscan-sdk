@@ -70,7 +70,7 @@ public class AuthenticationHandler implements CoreConstants {
 			throw new HttpException(500, Messages.getMessage("error.login.type.deprectated")); //$NON-NLS-1$
 		}
 
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_authProvider.getProxy());
 	    HttpResponse response = client.postForm(url, headers, params);
 	    
 		if(response.getResponseCode() == HttpsURLConnection.HTTP_OK || response.getResponseCode() == HttpsURLConnection.HTTP_CREATED) {
@@ -95,7 +95,7 @@ public class AuthenticationHandler implements CoreConstants {
 		headers.put("Accept", "application/json"); //$NON-NLS-1$ //$NON-NLS-2$
 		headers.put(CHARSET, UTF8);
 		
-		HttpClient httpClient = new HttpClient();
+		HttpClient httpClient = new HttpClient(m_authProvider.getProxy());
 		HttpResponse httpResponse;
 		try {
 			httpResponse = httpClient.get(request_url, headers, null);

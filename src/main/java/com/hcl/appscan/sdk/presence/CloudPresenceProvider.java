@@ -59,7 +59,7 @@ public class CloudPresenceProvider implements IPresenceProvider, CoreConstants {
 		String url =  m_authProvider.getServer() + String.format(API_PRESENCES_ID, id);
 		Map<String, String> headers = m_authProvider.getAuthorizationHeader(true);
 
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_authProvider.getProxy());
 		
 		try {
 			HttpResponse response = client.delete(url, headers, null);
@@ -83,7 +83,7 @@ public class CloudPresenceProvider implements IPresenceProvider, CoreConstants {
 		Map<String, String> headers = m_authProvider.getAuthorizationHeader(true);
 		Map<String, String> details = new HashMap<String, String>();
 
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_authProvider.getProxy());
 		
 		try {
 			HttpResponse response = client.get(url, headers, null);
@@ -111,7 +111,7 @@ public class CloudPresenceProvider implements IPresenceProvider, CoreConstants {
 		String url =  m_authProvider.getServer() + String.format(API_PRESENCES_NEW_KEY, id);
 		Map<String, String> headers = m_authProvider.getAuthorizationHeader(true);
 
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_authProvider.getProxy());
 		
 		try {
 			HttpResponse response = client.get(url, headers, null);
@@ -138,7 +138,7 @@ public class CloudPresenceProvider implements IPresenceProvider, CoreConstants {
 		Map<String, String> headers = m_authProvider.getAuthorizationHeader(true);
 		headers.putAll(Collections.singletonMap("range", "items=0-999999")); //$NON-NLS-1$ //$NON-NLS-2$
 		
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_authProvider.getProxy());
 		
 		try {
 			HttpResponse response = client.get(url, headers, null);

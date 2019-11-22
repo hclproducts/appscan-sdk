@@ -10,6 +10,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Iterator;
@@ -25,18 +26,28 @@ public class HttpClient {
     private static final String TWO_HYPHENS = "--"; //$NON-NLS-1$
     
     private IHttpProgress m_progressAdapter;
+    private Proxy m_proxy;
 	
 	
 	public enum Method {
 		GET, POST, PUT, DELETE;
 	}
 	
-	public HttpClient(IHttpProgress progressAdapter) {
+	public HttpClient(IHttpProgress progressAdapter, Proxy proxy) {
 		m_progressAdapter = progressAdapter;
+		m_proxy = proxy;
 	}
 	
 	public HttpClient() {
-		this(new DefaultHttpProgress());
+		this(new DefaultHttpProgress(), Proxy.NO_PROXY);
+	}
+	
+	public HttpClient(Proxy proxy) {
+		this(new DefaultHttpProgress(), proxy);
+	}
+	
+	public HttpClient(IHttpProgress progressAdapter) {
+		this(progressAdapter, Proxy.NO_PROXY);
 	}
 	
 	// ==============================
@@ -263,7 +274,7 @@ public class HttpClient {
 			Map<String, String> headerProperties) throws IOException {
 		URL requestURL = new URL(url);
 		HttpURLConnection conn = null;
-		conn = (HttpURLConnection) requestURL.openConnection();
+		conn = (HttpURLConnection) requestURL.openConnection(m_proxy);
 		conn.setRequestMethod(method.name());
 		conn.setReadTimeout(0);
 

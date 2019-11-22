@@ -6,8 +6,8 @@
 
 package com.hcl.appscan.sdk.auth;
 
+import java.net.Proxy;
 import java.util.Map;
-
 
 public interface IAuthenticationProvider {
 
@@ -38,5 +38,11 @@ public interface IAuthenticationProvider {
 	 * 
 	 * @param connection The connection data to save.
 	 */
-	public void saveConnection(String connection);	
+	public void saveConnection(String connection);
+	
+	/**
+	 * Gets the {@link Proxy} to use for connections.
+	 * @return
+	 */
+	public Proxy getProxy();
 }

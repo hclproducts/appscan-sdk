@@ -8,6 +8,7 @@ package com.hcl.appscan.sdk.scanners.sast;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.Proxy;
 import java.util.Map;
 
 import com.hcl.appscan.sdk.Messages;
@@ -78,7 +79,8 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 		String targetDir = targetFile.isDirectory() ? targetFile.getAbsolutePath() : targetFile.getParent();
 
 		//Create and run the process
-		new SAClient(getProgress()).run(targetDir, getProperties());
+		Proxy proxy = getServiceProvider().getAuthenticationProvider().getProxy();
+		new SAClient(getProgress(), proxy).run(targetDir, getProperties());
 		String irxDir = getProperties().containsKey(SAVE_LOCATION) ? getProperties().get(SAVE_LOCATION) : targetDir;
 		m_irx = new File(irxDir, getName() + IRX_EXTENSION);
 		if(!m_irx.isFile())

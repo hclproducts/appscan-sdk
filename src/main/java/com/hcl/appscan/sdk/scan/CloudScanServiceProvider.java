@@ -52,7 +52,7 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
 		String request_url =  m_authProvider.getServer() + String.format(API_SCANNER, type);
 		Map<String, String> request_headers = m_authProvider.getAuthorizationHeader(true);
 		
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_authProvider.getProxy());
 		
 		try {
 			HttpResponse response = client.postForm(request_url, request_headers, params);
@@ -86,7 +86,7 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
 		List<HttpPart> parts = new ArrayList<HttpPart>();
 		parts.add(new HttpPart(FILE_TO_UPLOAD, file, "multipart/form-data")); //$NON-NLS-1$
 		
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_authProvider.getProxy());
 		
 		try {
 			HttpResponse response = client.postMultipart(fileUploadAPI, m_authProvider.getAuthorizationHeader(true), parts);		
@@ -111,7 +111,7 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
 		String request_url = m_authProvider.getServer() + String.format(API_BASIC_DETAILS, scanId);
 		Map<String, String> request_headers = m_authProvider.getAuthorizationHeader(true);
 		
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_authProvider.getProxy());
 		HttpResponse response = client.get(request_url, request_headers, null);
 		
 		if (response.getResponseCode() == HttpsURLConnection.HTTP_OK || response.getResponseCode() == HttpsURLConnection.HTTP_CREATED)
@@ -131,7 +131,7 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
 		String request_url = m_authProvider.getServer() + String.format(API_NONCOMPLIANT_ISSUES, scanId);
 		Map<String, String> request_headers = m_authProvider.getAuthorizationHeader(true);
 		
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_authProvider.getProxy());
 		HttpResponse response = client.get(request_url, request_headers, null);
 		
 		if (response.getResponseCode() == HttpsURLConnection.HTTP_OK || response.getResponseCode() == HttpsURLConnection.HTTP_CREATED)

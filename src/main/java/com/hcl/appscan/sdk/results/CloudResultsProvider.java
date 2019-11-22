@@ -176,7 +176,7 @@ public class CloudResultsProvider implements IResultsProvider, Serializable, Cor
 		Map<String, String> request_headers = authProvider.getAuthorizationHeader(true);
 		request_headers.put(CONTENT_LENGTH, "0"); //$NON-NLS-1$
 	
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_scanProvider.getAuthenticationProvider().getProxy());
 		HttpResponse response = client.get(request_url, request_headers, null);
 	
 		if (response.getResponseCode() == HttpsURLConnection.HTTP_OK) {
@@ -214,7 +214,7 @@ public class CloudResultsProvider implements IResultsProvider, Serializable, Cor
 		Map<String, String> request_headers = authProvider.getAuthorizationHeader(true);
 		request_headers.put(CONTENT_LENGTH, "0"); //$NON-NLS-1$
 	
-		HttpClient client = new HttpClient();
+		HttpClient client = new HttpClient(m_scanProvider.getAuthenticationProvider().getProxy());
 		HttpResponse response = client.get(request_url, request_headers, null);
     	
 		if (response.getResponseCode() != HttpsURLConnection.HTTP_OK) {
