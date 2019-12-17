@@ -23,11 +23,10 @@ import com.hcl.appscan.sdk.logging.IProgress;
 import com.hcl.appscan.sdk.scan.IScanManager;
 import com.hcl.appscan.sdk.scan.IScanServiceProvider;
 import com.hcl.appscan.sdk.scan.ITarget;
-import com.hcl.appscan.sdk.scanners.sast.SASTConstants;
-import com.hcl.appscan.sdk.scanners.sast.SASTScan;
 import com.hcl.appscan.sdk.scanners.sast.targets.ISASTTarget;
 import com.hcl.appscan.sdk.scanners.sast.xml.ModelWriter;
 import com.hcl.appscan.sdk.scanners.sast.xml.XmlWriter;
+import com.hcl.appscan.sdk.utils.SystemUtil;
 
 public class SASTScanManager implements IScanManager{
 	
@@ -45,6 +44,8 @@ public class SASTScanManager implements IScanManager{
 		createConfig();
 		properties.put(CoreConstants.TARGET, m_workingDirectory);
 		properties.put(SASTConstants.PREPARE_ONLY, Boolean.toString(true));
+		if(!properties.containsKey(CoreConstants.SCAN_NAME))
+			properties.put(CoreConstants.SCAN_NAME, getDefaultScanName());
 		run(progress, properties, null);
 	}
 
@@ -56,6 +57,9 @@ public class SASTScanManager implements IScanManager{
 		}
 		else
 			properties.put(CoreConstants.TARGET, m_scan.getIrx().getAbsolutePath());
+		
+		if(!properties.containsKey(CoreConstants.SCAN_NAME))
+			properties.put(CoreConstants.SCAN_NAME, getDefaultScanName());
 		
 		run(progress, properties, provider);
 	}
@@ -98,5 +102,9 @@ public class SASTScanManager implements IScanManager{
 		} catch (IOException | TransformerException  e) {
 			throw new AppScanException(e.getLocalizedMessage(), e);
 		}
+	}
+	
+	private String getDefaultScanName() {
+		return new File(m_workingDirectory).getName() + SystemUtil.getTimeStamp();
 	}
 }

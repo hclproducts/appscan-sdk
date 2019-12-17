@@ -79,7 +79,7 @@ public class SASTScan extends ASoCScan implements SASTConstants {
 		String targetDir = targetFile.isDirectory() ? targetFile.getAbsolutePath() : targetFile.getParent();
 
 		//Create and run the process
-		Proxy proxy = getServiceProvider().getAuthenticationProvider().getProxy();
+		Proxy proxy = getServiceProvider() == null ? Proxy.NO_PROXY : getServiceProvider().getAuthenticationProvider().getProxy();		
 		new SAClient(getProgress(), proxy).run(targetDir, getProperties());
 		String irxDir = getProperties().containsKey(SAVE_LOCATION) ? getProperties().get(SAVE_LOCATION) : targetDir;
 		m_irx = new File(irxDir, getName() + IRX_EXTENSION);
