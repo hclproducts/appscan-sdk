@@ -39,6 +39,8 @@ public interface IScanManager {
 	
 	/**
 	 * Retrieves the scan results as a file.
+	 * @param destination The destination File for the results.
+	 * @param format The format of the results.
 	 * @throws AppScanException if there are no results available.
 	 */
 	void getScanResults(File destination, String format) throws AppScanException;

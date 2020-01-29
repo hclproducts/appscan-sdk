@@ -42,7 +42,7 @@ public interface IAuthenticationProvider {
 	
 	/**
 	 * Gets the {@link Proxy} to use for connections.
-	 * @return
+	 * @return The proxy
 	 */
 	public Proxy getProxy();
 }

@@ -31,7 +31,7 @@ public class ASEAuthenticationHandler implements CoreConstants{
 	 * @param username The username.
 	 * @param password The password.
 	 * @param persist True to persist the credentials.
-	 * @param type The LoginType.
+	 * @param url The url of the ASE server
 	 * @return True if successful.
 	 * @throws IOException If an error occurs.
 	 * @throws JSONException If an error occurs.
