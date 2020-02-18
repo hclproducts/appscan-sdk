@@ -55,7 +55,7 @@ public class SAClient implements SASTConstants {
 	 * @throws ScannerException If an error occurs.
 	 */
 	public int run(String workingDir, Map<String, String> properties) throws IOException, ScannerException {
-		return runClient(workingDir, getClientArgs(properties), properties.get(APPSCAN_IRGEN_CLIENT));
+		return runClient(workingDir, getClientArgs(properties), properties.get(APPSCAN_IRGEN_CLIENT), properties.get(APPSCAN_CLIENT_VERSION));
 	}
 
 	/**
@@ -72,16 +72,19 @@ public class SAClient implements SASTConstants {
 		return runClient(workingDir, args, "");
 	}
 		
-	private int runClient(String workingDir, List<String> args, String irGenClient) throws IOException, ScannerException {
+	private int runClient(String workingDir, List<String> args, String irGenClient, String clientVersion) throws IOException, ScannerException {
 		List<String> arguments = new ArrayList<String>();
 		arguments.add(getClientScript());
 		arguments.addAll(args);
 		m_builder = new ProcessBuilder(arguments);
 		m_builder.directory(new File(workingDir));
 		m_builder.redirectErrorStream(true);
-		if (irGenClient != null && !irGenClient.isEmpty()) {
+		if (irGenClient != null && !irGenClient.isEmpty())
 			m_builder.environment().put(APPSCAN_IRGEN_CLIENT, irGenClient);
-		}
+		
+		if (clientVersion != null && !clientVersion.isEmpty())
+			m_builder.environment().put(APPSCAN_CLIENT_VERSION, clientVersion);
+			
 		m_progress.setStatus(new Message(Message.INFO, Messages.getMessage(PREPARING_IRX, getLocalClientVersion())));
 		final Process proc = m_builder.start();
 		new Thread(new Runnable() {
