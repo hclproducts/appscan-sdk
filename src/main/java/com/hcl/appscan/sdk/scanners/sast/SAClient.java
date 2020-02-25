@@ -80,7 +80,7 @@ public class SAClient implements SASTConstants {
 	 */
 	@Deprecated
 	public int run(String workingDir, List<String> args) throws IOException, ScannerException {
-		return runClient(workingDir, args, "");
+		return runClient(workingDir, args, "", "");
 	}
 		
 	private int runClient(String workingDir, List<String> args, String irGenClient, String clientVersion) throws IOException, ScannerException {
