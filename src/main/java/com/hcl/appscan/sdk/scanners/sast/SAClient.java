@@ -70,7 +70,7 @@ public class SAClient implements SASTConstants {
 						 getClientArgs(properties),
 						 properties.get(APPSCAN_IRGEN_CLIENT),
 						 properties.get(APPSCAN_CLIENT_VERSION),
-						 properties.get(PLUGIN_TOOL_VERSION));
+						 properties.get(IRGEN_CLIENT_PLUGIN_VERSION));
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class SAClient implements SASTConstants {
 			m_builder.environment().put(APPSCAN_CLIENT_VERSION, clientVersion);
 		
 		if (pluginToolVersion != null && !pluginToolVersion.isEmpty())
-			m_builder.environment().put(PLUGIN_TOOL_VERSION, pluginToolVersion);
+			m_builder.environment().put(IRGEN_CLIENT_PLUGIN_VERSION, pluginToolVersion);
 			
 		m_progress.setStatus(new Message(Message.INFO, Messages.getMessage(PREPARING_IRX, getLocalClientVersion())));
 		final Process proc = m_builder.start();
