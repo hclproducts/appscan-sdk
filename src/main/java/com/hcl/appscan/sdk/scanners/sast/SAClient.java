@@ -87,7 +87,7 @@ public class SAClient implements SASTConstants {
 		return runClient(workingDir, args, "", "", "");
 	}
 		
-	private int runClient(String workingDir, List<String> args, String irGenClient, String clientVersion, String pluginToolVersion) throws IOException, ScannerException {
+	private int runClient(String workingDir, List<String> args, String irGenClient, String clientVersion, String irgenClientPluginVersion) throws IOException, ScannerException {
 		List<String> arguments = new ArrayList<String>();
 		arguments.add(getClientScript());
 		arguments.addAll(args);
@@ -100,8 +100,8 @@ public class SAClient implements SASTConstants {
 		if (clientVersion != null && !clientVersion.isEmpty())
 			m_builder.environment().put(APPSCAN_CLIENT_VERSION, clientVersion);
 		
-		if (pluginToolVersion != null && !pluginToolVersion.isEmpty())
-			m_builder.environment().put(IRGEN_CLIENT_PLUGIN_VERSION, pluginToolVersion);
+		if (irgenClientPluginVersion != null && !irgenClientPluginVersion.isEmpty())
+			m_builder.environment().put(IRGEN_CLIENT_PLUGIN_VERSION, irgenClientPluginVersion);
 			
 		m_progress.setStatus(new Message(Message.INFO, Messages.getMessage(PREPARING_IRX, getLocalClientVersion())));
 		final Process proc = m_builder.start();
