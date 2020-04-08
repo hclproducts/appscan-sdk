@@ -1,6 +1,6 @@
 /**
  * © Copyright IBM Corporation 2016.
- * © Copyright HCL Technologies Ltd. 2017,2018. 
+ * © Copyright HCL Technologies Ltd. 2017,2020.
  * LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
  */
 
@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.wink.json4j.JSONArray;
+import org.apache.wink.json4j.JSONArtifact;
 import org.apache.wink.json4j.JSONException;
 import org.apache.wink.json4j.JSONObject;
 
@@ -116,6 +117,11 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
 		
 		if (response.getResponseCode() == HttpsURLConnection.HTTP_OK || response.getResponseCode() == HttpsURLConnection.HTTP_CREATED)
 			return (JSONObject) response.getResponseBodyAsJSON();
+		else if (response.getResponseCode() != HttpsURLConnection.HTTP_BAD_REQUEST) {
+			JSONArtifact json = response.getResponseBodyAsJSON();
+			if (json != null && ((JSONObject)json).has(MESSAGE))
+				m_progress.setStatus(new Message(Message.ERROR, ((JSONObject)json).getString(MESSAGE)));
+		}
 
 		if (response.getResponseCode() == HttpsURLConnection.HTTP_BAD_REQUEST)
 			m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_INVALID_JOB_ID, scanId)));
