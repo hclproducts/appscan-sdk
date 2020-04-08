@@ -121,6 +121,9 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
 			JSONArtifact json = response.getResponseBodyAsJSON();
 			if (json != null && ((JSONObject)json).has(MESSAGE))
 				m_progress.setStatus(new Message(Message.ERROR, ((JSONObject)json).getString(MESSAGE)));
+			if (response.getResponseCode() == HttpsURLConnection.HTTP_FORBIDDEN && json != null &&
+					((JSONObject)json).has(KEY) && ((JSONObject) json).get(KEY).equals(UNAUTHORIZED_ACTION))
+				return (JSONObject) json;
 		}
 
 		if (response.getResponseCode() == HttpsURLConnection.HTTP_BAD_REQUEST)

@@ -40,7 +40,12 @@ public class NonCompliantIssuesResultProvider extends CloudResultsProvider {
 			if (obj == null) {
 				m_status = FAILED;
 				return;
+			} else if (obj.has(KEY) && obj.get(KEY).equals(UNAUTHORIZED_ACTION)) {
+				m_status = FAILED;
+				setHasResult(true);
+				return;
 			}
+
 			obj = (JSONObject) obj.get(LATEST_EXECUTION);
 
 			m_status = obj.getString(STATUS);
