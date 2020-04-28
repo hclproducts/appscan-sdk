@@ -1,6 +1,6 @@
 /**
  * © Copyright IBM Corporation 2016.
- * © Copyright HCL Technologies Ltd. 2017. 
+ * © Copyright HCL Technologies Ltd. 2017, 2020.
  * LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
  */
 
@@ -40,6 +40,7 @@ public class CloudResultsProvider implements IResultsProvider, Serializable, Cor
 	private   boolean m_hasResults;
 	protected IScanServiceProvider m_scanProvider;
 	protected IProgress m_progress;
+	protected String m_message;
 	
 	protected int m_totalFindings;
 	protected int m_highFindings;
@@ -130,7 +131,11 @@ public class CloudResultsProvider implements IResultsProvider, Serializable, Cor
 	public String getResultsFormat() {
 		return m_reportFormat;
 	}
-	
+
+	public String getMessage() {
+		return m_message;
+	}
+
 	@Override
 	public void setProgress(IProgress progress) {
 		m_progress = progress;
@@ -149,11 +154,6 @@ public class CloudResultsProvider implements IResultsProvider, Serializable, Cor
 	protected void loadResults() {
 		try {
 			JSONObject obj = m_scanProvider.getScanDetails(m_scanId);
-			if (obj != null && obj.has(KEY) && obj.get(KEY).equals(UNAUTHORIZED_ACTION)) {
-				m_status = FAILED;
-				m_hasResults = true;
-				return;
-			}
 			obj = (JSONObject) obj.get(LATEST_EXECUTION);
 			m_status = obj.getString(STATUS);
 			if(m_status != null && !(m_status.equalsIgnoreCase(INQUEUE) || m_status.equalsIgnoreCase(RUNNING))) {

@@ -51,7 +51,7 @@ public class ASEScan extends ASoCScan implements ScanConstants, Serializable {
 
     @Override
     public IResultsProvider getResultsProvider() {
-        ASEResultsProvider provider = new ASEResultsProvider(getScanId(), getType(), getServiceProvider(), getProgress());
+        ASEResultsProvider provider = new ASEResultsProvider(getScanId(), getType(), getServiceProvider(), getProgress(), getName());
         provider.setReportFormat(getReportFormat());
         return provider;
     }
