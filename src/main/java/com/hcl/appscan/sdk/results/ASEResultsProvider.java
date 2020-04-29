@@ -14,6 +14,7 @@ import com.hcl.appscan.sdk.logging.IProgress;
 import com.hcl.appscan.sdk.logging.Message;
 import com.hcl.appscan.sdk.scan.ASEScanServiceProvider;
 import com.hcl.appscan.sdk.scan.IScanServiceProvider;
+import com.hcl.appscan.sdk.scanners.ScanConstants;
 import com.hcl.appscan.sdk.utils.SystemUtil;
 import java.io.File;
 import java.io.FileWriter;
@@ -179,7 +180,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 				if ("by user".equals(description.toLowerCase())) {
 					m_progress.setStatus(new Message(Message.INFO, Messages.getMessage(SUSPENDED_RUNNING_SCAN, "Scan Name: "  + m_scanName)));
 				} else {
-					m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_RUNNING_SCAN, m_message)));
+					m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ScanConstants.ERROR_RUNNING_SCAN, m_message)));
 					m_status = FAILED;
 				}
 			}
@@ -353,7 +354,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 			return null;
 		}
 
-		String request_url = authProvider.getServer() + String.format(ASE_GET_FITEMS_STATISTICS, jobId);
+		String request_url = authProvider.getServer() + String.format(ASE_GET_FOLDER_ITEMS_STATISTICS, jobId);
 		Map<String, String> request_headers = authProvider.getAuthorizationHeader(true);
 
 		HttpsClient client = new HttpsClient();

@@ -87,7 +87,6 @@ public interface CoreConstants {
 	String DOWNLOADING_CLIENT			= "message.downloading.client";							//$NON-NLS-1$
 	String EXECUTING_SCAN				= "message.running.scan";								//$NON-NLS-1$
 	String UPLOADING_FILE				= "message.uploading.file";								//$NON-NLS-1$
-	String SUSPENDED_RUNNING_SCAN		= "messages.suspended.scan";							//$NON-NLS-1$
 
 	String ERROR_AUTHENTICATING			= "error.authenticating";								//$NON-NLS-1$
 	String ERROR_DOWNLOADING_CLIENT 	= "error.download.client";								//$NON-NLS-1$
@@ -101,7 +100,6 @@ public interface CoreConstants {
 	String ERROR_INVALID_JOB_ID			= "error.invalid.job.id";								//$NON-NLS-1$
 	String ERROR_SUBMITTING_SCAN		= "error.submit.scan";									//$NON-NLS-1$
 	String ERROR_UPLOADING_FILE			= "error.upload.file";									//$NON-NLS-1$
-	String ERROR_RUNNING_SCAN			= "error.running.scan";									//$NON-NLS-1$
 
 	// ASE Status Messages
 	String CREATING_JOB                 = "message.creating.job";                               //$NON-NLS-1$
@@ -111,7 +109,8 @@ public interface CoreConstants {
 	String EXECUTING_JOB				= "message.running.job";								//$NON-NLS-1$
 	String EXECUTE_JOB_SUCCESS    		= "message.executed.job";								//$NON-NLS-1$
 	String ERROR_EXECUTE_JOB  			= "error.execute.job";									//$NON-NLS-1$
-	
+    String SUSPENDED_RUNNING_SCAN		= "messages.suspended.scan";							//$NON-NLS-1$
+
     // ASE APIs
     String ASE_API                      = "/api";                                                //$NON-NLS-1$
     String ASE_APPS                     = ASE_API + "/applications";                             //$NON-NLS-1$
@@ -134,7 +133,7 @@ public interface CoreConstants {
     String ASE_REPORTS                  = ASE_API + "/folderitems/%s/reports";                   //$NON-NLS-1$
     String ASE_GET_FOLDERITEMS          = ASE_API + "/folderitems/%s";							 //$NON-NLS-1$
 
-	String ASE_GET_FITEMS_STATISTICS	= ASE_API + "/folderitems/%s/statistics";				 //$NON-NLS-1$
+	String ASE_GET_FOLDER_ITEMS_STATISTICS	= ASE_API + "/folderitems/%s/statistics";				 //$NON-NLS-1$
 
 	String ASE_UPLOADED_FILE            = "uploadedfile";                                        //$NON-NLS-1$
 
