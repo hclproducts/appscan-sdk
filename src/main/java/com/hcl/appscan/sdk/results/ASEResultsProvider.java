@@ -32,7 +32,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
     private static final long serialVersionUID = 1L;
 
 	private static String DEFAULT_REPORT_FORMAT = "json"; //$NON-NLS-1$
-
+	
 	private String m_type;
 	private String m_scanId;
 	private String m_status;
@@ -42,7 +42,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 	private IProgress m_progress;
 	private String m_message;
 	private String m_scanName;
-
+	
 	private int m_totalFindings;
 	private int m_highFindings;
 	private int m_mediumFindings;
@@ -57,12 +57,12 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 		m_reportFormat = DEFAULT_REPORT_FORMAT;
 		m_scanName = scanName;
     }
-
+    
     @Override
     public void getResultsFile(File file, String format) {
         if(format == null)
 			format = getResultsFormat();
-
+		
 		if(file != null && !file.exists()) {
 			try {
 				getReport(m_scanId, format, file);
@@ -71,7 +71,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 			}
 		}
     }
-
+    
     @Override
 	public Collection<?> getFindings() {
 		return null;
@@ -106,7 +106,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 		checkResults();
 		return m_infoFindings;
 	}
-
+        
     @Override
     public String getType() {
         return m_type;
@@ -117,7 +117,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
         checkResults();
 		return m_hasResults;
 	}
-
+	
     protected void setHasResult(boolean value) {
         m_hasResults=value;
     }
@@ -137,7 +137,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 		return m_message;
 	}
 
-	@Override
+    @Override
     public void setReportFormat(String format) {
         m_reportFormat=format;
     }
@@ -147,14 +147,14 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
         m_progress = progress;
 		m_scanProvider.setProgress(progress);
     }
-
+    
     private void loadResults() {
 		try {
 			m_status = getScanStatus(m_scanId);
 //			m_status = getStatisticsStatus(m_scanId);
-			if (m_status != null && m_status.equalsIgnoreCase("Ready")) {
+            if (m_status != null && m_status.equalsIgnoreCase("Ready")) {
 				m_message = "";
-				m_status=getReportPackStatus(m_scanId);
+                m_status=getReportPackStatus(m_scanId);
             }
 			if(m_status != null && m_status.equalsIgnoreCase("Ready")) {
                 JSONObject obj = m_scanProvider.getScanDetails(m_scanId);
@@ -188,7 +188,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 			m_status = FAILED;
 		}
 	}
-
+	
 	private void getReport(String scanId, String format, File destination) throws IOException, JSONException {
 		IAuthenticationProvider authProvider = m_scanProvider.getAuthenticationProvider();
 		if(authProvider.isTokenExpired()) {
@@ -196,25 +196,25 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 			return;
 		}
         String reportPackId=getReportPackId(scanId);
-
+	
 		String request_url = authProvider.getServer() + String.format(ASE_REPORTS, reportPackId);
 		Map<String, String> request_headers = authProvider.getAuthorizationHeader(true);
-
+			
 		HttpsClient client = new HttpsClient();
 		HttpResponse response = client.get(request_url, request_headers, null);
-
+	
 		if (response.getResponseCode() == HttpsURLConnection.HTTP_OK) {
 			if (destination.isDirectory()) {
 				String fileName = DEFAULT_RESULT_NAME + "_" + SystemUtil.getTimeStamp() + "." + format; //$NON-NLS-1$ //$NON-NLS-2$
 				destination = new File(destination, fileName);
 			}
-
+	
 			destination.getParentFile().mkdirs();
             JSONObject json=getResultJson(response);
-
+                        
 			FileWriter writer=new FileWriter(destination);
             writer.write(json.toString());
-            writer.flush();
+            writer.flush();                                         
 		} else {
 			JSONObject object = (JSONObject) response.getResponseBodyAsJSON();
 			if (object.has(MESSAGE)) {
@@ -225,13 +225,13 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 			}
 		}
 	}
-
+        
     private JSONObject getResultJson(HttpResponse response) {
 	    try {
 	        JSONObject object=(JSONObject) response.getResponseBodyAsJSON();
 	        JSONObject reportsObject=object.getJSONObject("reports");
 	        JSONArray reports=reportsObject.getJSONArray("report");
-
+	        
 	        for (Object obj:reports.toArray()) {
 	            JSONObject reportObject=(JSONObject)obj;
 	            if (reportObject.getString("name").equalsIgnoreCase("Security Issues")) {
@@ -243,12 +243,12 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 	    }
 	    return null;
     }
-
+	
 	private void checkResults() {
 		if(!m_hasResults)
 			loadResults();
 	}
-
+   
     private String getReportPackId(String scanId) {
         return String.valueOf(Integer.parseInt(scanId)+1);
         // please uncomment the below code when you figure out how to parse the reponse.
@@ -292,12 +292,12 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 			m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_LOGIN_EXPIRED)));
 			return null;
 		}
-
+                
         String request_url = authProvider.getServer() + String.format(ASE_GET_FOLDERITEMS, jobId);
-		Map<String, String> request_headers = authProvider.getAuthorizationHeader(true);
-
+		Map<String, String> request_headers = authProvider.getAuthorizationHeader(true); 
+		
 		HttpsClient client = new HttpsClient();
-
+		
             try {
                 HttpResponse response = client.get(request_url, request_headers, null);
                 if (response.getResponseCode() == HttpsURLConnection.HTTP_OK){
@@ -321,13 +321,13 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 			m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_LOGIN_EXPIRED)));
 			return null;
 		}
-
+        
         String reportPackId=getReportPackId(jobId);
         String request_url = authProvider.getServer() + String.format(ASE_GET_FOLDERITEMS, reportPackId);
 		Map<String, String> request_headers = authProvider.getAuthorizationHeader(true);
-
+        
 		HttpsClient client = new HttpsClient();
-
+		
             try {
                 HttpResponse response = client.get(request_url, request_headers, null);
                 if (response.getResponseCode() == HttpsURLConnection.HTTP_OK) {
@@ -335,7 +335,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
                     JSONObject reportPack=object.getJSONObject("report-pack");
                     JSONObject state=reportPack.getJSONObject("state");
                     return state.getString("name");
-
+                    
                 }
                 else {
                     m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_GETTING_RESULT)));
