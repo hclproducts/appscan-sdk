@@ -169,18 +169,24 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 			}
 			if (RUNNING.equalsIgnoreCase(m_status)) {
 				m_message = "";
-			} else if (m_status != null && m_status.startsWith(SUSPENDED)) {
+			} else if (m_status != null && m_status.startsWith(SUSPENDED)) {    // In case of Scan Failure ASE returns Suspended (With Reason) in Status
 				this.m_message = m_status;
 
 				String description = "";
+				boolean isSuspendedByUser = false;
 				if (m_status.contains("(") && m_status.contains(")")) {
 					description = m_status.substring(m_status.indexOf("(") + 1, m_status.indexOf(")"));
+					// If User Suspends(Pause) Job in ASE then it returns Suspended(By User) status message, Scan status is not set to FAILED
+                    if ("by user".equals(description.toLowerCase())) {
+                        m_progress.setStatus(new Message(Message.INFO, Messages.getMessage(SUSPEND_JOB_BYUSER, "Scan Name: "  + m_scanName)));
+                        m_message = Messages.getMessage(SUSPEND_JOB_BYUSER, "Scan Name: "  + m_scanName);
+                        isSuspendedByUser = true;
+                    }
 				}
-
-				if ("by user".equals(description.toLowerCase())) {
-					m_progress.setStatus(new Message(Message.INFO, Messages.getMessage(SUSPENDED_RUNNING_SCAN, "Scan Name: "  + m_scanName)));
-				} else {
-					m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ScanConstants.ERROR_RUNNING_SCAN, m_message)));
+				// If Scan is not Paused by User and we get Suspended state from ASE, Job status is set to FAILED to determine Scan has FAILED in Jenkins
+				if (!isSuspendedByUser) {
+					m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ScanConstants.ERROR_RUNNING_SCAN, m_status)));
+					m_message = Messages.getMessage(ScanConstants.ERROR_RUNNING_SCAN, m_status);
 					m_status = FAILED;
 				}
 			}

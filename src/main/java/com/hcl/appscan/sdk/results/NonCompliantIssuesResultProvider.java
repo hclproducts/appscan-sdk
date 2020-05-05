@@ -42,7 +42,6 @@ public class NonCompliantIssuesResultProvider extends CloudResultsProvider {
 				return;
 			} else if (obj.has(KEY) && obj.get(KEY).equals(UNAUTHORIZED_ACTION)) {
 				m_status = FAILED;
-//				setHasResult(true);
 				return;
 			}
 
@@ -52,7 +51,6 @@ public class NonCompliantIssuesResultProvider extends CloudResultsProvider {
 			if (FAILED.equalsIgnoreCase(m_status) && obj.has(USER_MESSAGE)) {
 				m_progress.setStatus(new Message(Message.ERROR, obj.getString(USER_MESSAGE)));
 				m_message = obj.getString(USER_MESSAGE);
-//				setHasResult(true);
 			} else if (m_status != null && !(m_status.equalsIgnoreCase(INQUEUE) || m_status.equalsIgnoreCase(RUNNING))) {
 				JSONArray array = m_scanProvider.getNonCompliantIssues(m_scanId);
 				m_totalFindings = array.length();

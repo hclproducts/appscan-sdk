@@ -109,7 +109,7 @@ public interface CoreConstants {
 	String EXECUTING_JOB				= "message.running.job";								//$NON-NLS-1$
 	String EXECUTE_JOB_SUCCESS    		= "message.executed.job";								//$NON-NLS-1$
 	String ERROR_EXECUTE_JOB  			= "error.execute.job";									//$NON-NLS-1$
-    String SUSPENDED_RUNNING_SCAN		= "messages.suspended.scan";							//$NON-NLS-1$
+    String SUSPEND_JOB_BYUSER		    = "message.suspend.job.byuser";							//$NON-NLS-1$
 
     // ASE APIs
     String ASE_API                      = "/api";                                                //$NON-NLS-1$
