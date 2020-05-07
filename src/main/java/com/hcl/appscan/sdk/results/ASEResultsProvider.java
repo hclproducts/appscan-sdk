@@ -186,7 +186,6 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 				// If Scan is not Paused by User and we get Suspended state from ASE, Job status is set to FAILED to determine Scan has FAILED in Jenkins
 				if (!isSuspendedByUser) {
 					m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ScanConstants.ERROR_RUNNING_SCAN, m_status)));
-					m_message = Messages.getMessage(ScanConstants.ERROR_RUNNING_SCAN, m_status);
 					m_status = FAILED;
 				}
 			}
