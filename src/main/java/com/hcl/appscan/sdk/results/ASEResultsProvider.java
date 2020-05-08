@@ -159,6 +159,11 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
             }
 			if(m_status != null && m_status.equalsIgnoreCase("Ready")) {
                 JSONObject obj = m_scanProvider.getScanDetails(m_scanId);
+                if (obj == null) {
+                    m_message = Messages.getMessage(RESULTS_UNAVAILABLE);
+                    throw new NullPointerException(Messages.getMessage(RESULTS_UNAVAILABLE));
+                }
+
 				m_totalFindings = obj.getInt(TOTAL_ISSUES);
 				m_highFindings = obj.getInt(HIGH_ISSUES);
 				m_mediumFindings = obj.getInt(MEDIUM_ISSUES);
