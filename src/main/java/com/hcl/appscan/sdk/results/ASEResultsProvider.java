@@ -318,7 +318,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
                     return state.getString("name");
                 }
                 else {
-                    m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_GETTING_RESULT)));
+                    m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_GETTING_RESULT, "")));
                 }
             } catch (IOException |JSONException ex) {
                 Logger.getLogger(ASEResultsProvider.class.getName()).log(Level.SEVERE, null, ex);
@@ -349,7 +349,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
                     
                 }
                 else {
-                    m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_GETTING_RESULT)));
+                    m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_GETTING_RESULT, "")));
                 }
             } catch (IOException |JSONException ex) {
                 Logger.getLogger(ASEResultsProvider.class.getName()).log(Level.SEVERE, null, ex);
