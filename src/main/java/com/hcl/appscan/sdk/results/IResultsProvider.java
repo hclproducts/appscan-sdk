@@ -82,8 +82,14 @@ public interface IResultsProvider {
 	 * @return The format of the results file.
 	 */
 	public String getResultsFormat();
-        
-        /**
+
+    /**
+     * Gets the Message as populated from the response describing Scan Status.
+     * @return A string Message complementing the Status.
+     */
+    public String getMessage();
+
+    /**
 	 * Specifies the format to use for reports.
 	 * 
 	 * @param format The format of the report. 

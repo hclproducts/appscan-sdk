@@ -75,6 +75,8 @@ public interface CoreConstants {
 	String INQUEUE 					    = "InQueue"; 											//$NON-NLS-1$
 	String READY						= "Ready";												//$NON-NLS-1$
 	String FAILED						= "Failed";												//$NON-NLS-1$
+	String PAUSING						= "Pausing";											//$NON-NLS-1$
+	String PAUSED						= "Paused";												//$NON-NLS-1$
 
 	String TOTAL_ISSUES					= "NIssuesFound";										//$NON-NLS-1$
 	String HIGH_ISSUES					= "NHighIssues";										//$NON-NLS-1$
@@ -86,6 +88,7 @@ public interface CoreConstants {
 	String DOWNLOADING_CLIENT			= "message.downloading.client";							//$NON-NLS-1$
 	String EXECUTING_SCAN				= "message.running.scan";								//$NON-NLS-1$
 	String UPLOADING_FILE				= "message.uploading.file";								//$NON-NLS-1$
+    String SUSPEND_JOB_BYUSER		    = "message.suspend.job.byuser";                         //$NON-NLS-1$
 
 	String ERROR_AUTHENTICATING			= "error.authenticating";								//$NON-NLS-1$
 	String ERROR_DOWNLOADING_CLIENT 	= "error.download.client";								//$NON-NLS-1$

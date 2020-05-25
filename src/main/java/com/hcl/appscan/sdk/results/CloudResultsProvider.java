@@ -40,6 +40,7 @@ public class CloudResultsProvider implements IResultsProvider, Serializable, Cor
 	private   boolean m_hasResults;
 	protected IScanServiceProvider m_scanProvider;
 	protected IProgress m_progress;
+    protected String m_message;
 	
 	protected int m_totalFindings;
 	protected int m_highFindings;
@@ -130,7 +131,12 @@ public class CloudResultsProvider implements IResultsProvider, Serializable, Cor
 	public String getResultsFormat() {
 		return m_reportFormat;
 	}
-	
+
+    @Override
+    public String getMessage() {
+        return m_message;
+    }
+
 	@Override
 	public void setProgress(IProgress progress) {
 		m_progress = progress;

@@ -40,6 +40,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 	private boolean m_hasResults;
 	private IScanServiceProvider m_scanProvider;
 	private IProgress m_progress;
+    private String m_message;
 	
 	private int m_totalFindings;
 	private int m_highFindings;
@@ -128,6 +129,11 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
     @Override
     public String getResultsFormat() {
         return m_reportFormat;
+    }
+
+    @Override
+    public String getMessage() {
+        return m_message;
     }
 
     @Override
