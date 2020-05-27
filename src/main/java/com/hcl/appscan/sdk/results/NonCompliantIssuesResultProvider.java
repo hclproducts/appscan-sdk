@@ -51,11 +51,11 @@ public class NonCompliantIssuesResultProvider extends CloudResultsProvider {
 			m_status = obj.getString(STATUS);
 			if (FAILED.equalsIgnoreCase(m_status) && obj.has(USER_MESSAGE)) {
 				m_progress.setStatus(new Message(Message.ERROR, obj.getString(USER_MESSAGE)));
-                m_message = obj.getString(USER_MESSAGE);
+				m_message = obj.getString(USER_MESSAGE);
 			} else if (PAUSED.equalsIgnoreCase(m_status)) {
-			    m_progress.setStatus(new Message(Message.INFO, Messages.getMessage(SUSPEND_JOB_BYUSER, "Scan Id: " + m_scanId)));
-			    m_message = Messages.getMessage(SUSPEND_JOB_BYUSER, "Scan Id: " + m_scanId);
-            } else if (m_status != null && !(m_status.equalsIgnoreCase(INQUEUE) || m_status.equalsIgnoreCase(RUNNING) || m_status.equalsIgnoreCase(PAUSING))) {
+				m_progress.setStatus(new Message(Message.INFO, Messages.getMessage(SUSPEND_JOB_BYUSER, "Scan Id: " + m_scanId)));
+				m_message = Messages.getMessage(SUSPEND_JOB_BYUSER, "Scan Id: " + m_scanId);
+			} else if (m_status != null && !(m_status.equalsIgnoreCase(INQUEUE) || m_status.equalsIgnoreCase(RUNNING) || m_status.equalsIgnoreCase(PAUSING))) {
 				JSONArray array = m_scanProvider.getNonCompliantIssues(m_scanId);
 				m_totalFindings = array.length();
 				for (int i = 0; i < array.length(); i++) {
@@ -80,7 +80,7 @@ public class NonCompliantIssuesResultProvider extends CloudResultsProvider {
 					}
 				}
 				setHasResult(true);
-                m_message = "";
+				m_message = "";
 			} else if (RUNNING.equalsIgnoreCase(m_status)) m_message = "";
 		} catch (IOException | JSONException | NullPointerException e) {
 			m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_GETTING_DETAILS, e.getMessage())),
