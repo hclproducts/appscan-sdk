@@ -134,33 +134,34 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
 	
         @Override
 	public JSONArray getNonCompliantIssues(String scanId) throws IOException, JSONException {
-		if(loginExpired())
-			return null;
-		
-		String request_url = m_authProvider.getServer() + String.format(API_NONCOMPLIANT_ISSUES, scanId);
-		Map<String, String> request_headers = m_authProvider.getAuthorizationHeader(true);
-		
-		HttpClient client = new HttpClient(m_authProvider.getProxy());
-		HttpResponse response = client.get(request_url, request_headers, null);
-		
-		if (response.getResponseCode() == HttpsURLConnection.HTTP_OK || response.getResponseCode() == HttpsURLConnection.HTTP_CREATED)
-			return (JSONArray)response.getResponseBodyAsJSON();
+        	if(loginExpired())
+    			return null;
+    		
+    		String request_url = m_authProvider.getServer() + String.format(API_ISSUES_COUNT, "Scan", scanId);
+    		request_url += "?applyPolicies=All";
+    		Map<String, String> request_headers = m_authProvider.getAuthorizationHeader(true);
+    		request_headers.put("Content-Type", "application/json; charset=UTF-8");
+    		request_headers.put("Accept", "application/json");
+    		
+    		HttpClient client = new HttpClient(m_authProvider.getProxy());
+    		HttpResponse response = client.get(request_url, request_headers, null);
+    		
+    		if (response.getResponseCode() == HttpsURLConnection.HTTP_OK || response.getResponseCode() == HttpsURLConnection.HTTP_CREATED)
+    			return (JSONArray)response.getResponseBodyAsJSON();
 
-		if (response.getResponseCode() == HttpsURLConnection.HTTP_BAD_REQUEST)
-			m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_INVALID_JOB_ID, scanId)));
-                else {
-                        JSONObject obj=(JSONObject)response.getResponseBodyAsJSON();
-                        if (obj!=null && obj.has(MESSAGE)){
-                            m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(obj.getString(MESSAGE))));
-                        }
-                        else {
-                            m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_GETTING_RESULT, response.getResponseCode())));
-                        }
-                        
+    		if (response.getResponseCode() == HttpsURLConnection.HTTP_BAD_REQUEST)
+    			m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_GETTING_INFO, "Scan", scanId)));
+            else {
+                JSONObject obj=(JSONObject)response.getResponseBodyAsJSON();
+                if (obj!=null && obj.has(MESSAGE)){
+                    m_progress.setStatus(new Message(Message.ERROR, obj.getString(MESSAGE)));
                 }
-                        
-		
-		return null;
+                else {
+                    m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_GETTING_DETAILS, response.getResponseCode())));
+                }
+            }
+                            
+    		return null;
 	}
 	
 	@Override

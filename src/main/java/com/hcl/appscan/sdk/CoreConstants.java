@@ -65,6 +65,7 @@ public interface CoreConstants {
 	String API_SACLIENT_VERSION			= "/api/%s/StaticAnalyzer/SAClientUtil?os=%s&meta=%s"; 	//$NON-NLS-1$
 	String API_KEY_PATH					= "/api/ideclientuilogin";								//$NON-NLS-1$
 	String API_REPORT_STATUS			= "/api/V2/Reports/%s";									//$NON-NLS-1$
+	String API_ISSUES_COUNT				= "/api/v2/Issues/CountBySeverity/%s/%s";				//$NON-NLS-1$
 
 	String DEFAULT_RESULT_NAME			= "asoc_results";										//$NON-NLS-1$
 	String SACLIENT_INSTALL_DIR			= "SAClientInstall";									//$NON-NLS-1$
@@ -99,6 +100,7 @@ public interface CoreConstants {
 	String ERROR_INVALID_JOB_ID			= "error.invalid.job.id";								//$NON-NLS-1$
 	String ERROR_SUBMITTING_SCAN		= "error.submit.scan";									//$NON-NLS-1$
 	String ERROR_UPLOADING_FILE			= "error.upload.file";									//$NON-NLS-1$
+	String ERROR_GETTING_INFO			= "error.getting.info";									//$NON-NLS-1$
 	
 	// ASE Status Messages
 	String CREATING_JOB                 = "message.creating.job";                               //$NON-NLS-1$
