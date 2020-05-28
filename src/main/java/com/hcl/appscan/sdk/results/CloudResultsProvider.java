@@ -41,7 +41,7 @@ public class CloudResultsProvider implements IResultsProvider, Serializable, Cor
 	protected IScanServiceProvider m_scanProvider;
 	protected IProgress m_progress;
 	protected String m_message;
-	
+
 	protected int m_totalFindings;
 	protected int m_highFindings;
 	protected int m_mediumFindings;

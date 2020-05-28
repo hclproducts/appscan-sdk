@@ -88,7 +88,7 @@ public interface IResultsProvider {
 	 * @return A string Message complementing the Status.
 	 */
 	public String getMessage();
-        
+
         /**
 	 * Specifies the format to use for reports.
 	 * 

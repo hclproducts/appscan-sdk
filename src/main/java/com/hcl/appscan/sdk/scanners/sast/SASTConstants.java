@@ -47,6 +47,7 @@ public interface SASTConstants {
 	String EXTRACTING_CLIENT			= "message.extracting.client";		//$NON-NLS-1$
 	String PREPARING_IRX				= "message.preparing.irx";			//$NON-NLS-1$
 	String SACLIENT_OUTDATED			= "message.saclient.old";			//$NON-NLS-1$
+	String SERVER_UNAVAILABLE			= "message.server.unavailable";		//$NON-NLS-1$
 	
 	//Errors
 	String IRX_MISSING					= "error.irx.missing";				//$NON-NLS-1$

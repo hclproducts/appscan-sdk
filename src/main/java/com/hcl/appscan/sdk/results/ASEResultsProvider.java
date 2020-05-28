@@ -43,7 +43,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 	private IProgress m_progress;
 	private String m_message;
 	private String m_scanName;
-	
+
 	private int m_totalFindings;
 	private int m_highFindings;
 	private int m_mediumFindings;

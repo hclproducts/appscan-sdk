@@ -74,7 +74,17 @@ public class ASEScanServiceProvider implements IScanServiceProvider, Serializabl
 		try {
 			HttpResponse response = client.postForm(request_url, request_headers, createJobParams);
 			int status = response.getResponseCode();
-		
+
+			// Handle scenarios of invalid input parameters during job creation.
+			// Currently ASE APIs do not return a valid response for invalid inputs 
+			// hence, making the check here for better error handling
+			if (status == HttpsURLConnection.HTTP_BAD_REQUEST
+					|| status == HttpsURLConnection.HTTP_NOT_FOUND) {
+				m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(
+						ERROR_CREATE_JOB, Messages.getMessage(ERROR_INVALID_DETAILS))));
+				return null;
+			}
+
 			JSONObject json = (JSONObject) response.getResponseBodyAsJSON();
 			
 			if (status == HttpsURLConnection.HTTP_CREATED) {

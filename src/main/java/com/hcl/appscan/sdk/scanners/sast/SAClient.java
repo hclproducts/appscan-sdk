@@ -184,9 +184,18 @@ public class SAClient implements SASTConstants {
 	}
 	
 	public boolean majorVersionChanged() throws IOException {
-		String serverMajorVersion = ServiceUtil.getSAClientVersion(m_proxy).substring(0, 1);
-		String localMajorVersion = getLocalClientVersion().substring(0, 1);
-		return !localMajorVersion.equals(serverMajorVersion);
+		String serverMajorVersion = ServiceUtil.getSAClientVersion(m_proxy);
+		String localMajorVersion = getLocalClientVersion();
+		
+		if (serverMajorVersion != null && localMajorVersion != null) {
+			serverMajorVersion = serverMajorVersion.substring(0, 1);
+			localMajorVersion = localMajorVersion.substring(0, 1);
+			return !localMajorVersion.equals(serverMajorVersion);
+		}
+		else {
+			m_progress.setStatus(new Message(Message.INFO, Messages.getMessage(SERVER_UNAVAILABLE)));
+			return false;
+		}
 	}
 	
 	public boolean shouldUpdateClient() throws IOException {
