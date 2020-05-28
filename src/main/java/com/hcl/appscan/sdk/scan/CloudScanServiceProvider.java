@@ -146,7 +146,7 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
     		HttpClient client = new HttpClient(m_authProvider.getProxy());
     		HttpResponse response = client.get(request_url, request_headers, null);
     		
-    		if (response.getResponseCode() == HttpsURLConnection.HTTP_OK || response.getResponseCode() == HttpsURLConnection.HTTP_CREATED)
+    		if (response.getResponseCode() == HttpsURLConnection.HTTP_OK)
     			return (JSONArray)response.getResponseBodyAsJSON();
 
     		if (response.getResponseCode() == HttpsURLConnection.HTTP_BAD_REQUEST)
