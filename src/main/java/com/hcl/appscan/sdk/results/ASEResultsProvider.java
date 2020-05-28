@@ -134,9 +134,10 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
         return m_reportFormat;
     }
 
-	public String getMessage() {
-		return m_message;
-	}
+    @Override
+    public String getMessage() {
+        return m_message;
+    }
 
     @Override
     public void setReportFormat(String format) {
@@ -154,7 +155,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 			m_status = getScanStatus(m_scanId);
 //			m_status = getStatisticsStatus(m_scanId);
             if (m_status != null && m_status.equalsIgnoreCase("Ready")) {
-				m_message = "";
+                m_message = "";
                 m_status=getReportPackStatus(m_scanId);
             }
 			if(m_status != null && m_status.equalsIgnoreCase("Ready")) {
@@ -182,11 +183,11 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 				if (m_status.contains("(") && m_status.contains(")")) {
 					description = m_status.substring(m_status.indexOf("(") + 1, m_status.indexOf(")"));
 					// If User Suspends(Pause) Job in ASE then it returns Suspended(By User) status message, Scan status is not set to FAILED
-                    if ("by user".equals(description.toLowerCase())) {
-                        m_progress.setStatus(new Message(Message.INFO, Messages.getMessage(SUSPEND_JOB_BYUSER, "Scan Name: "  + m_scanName)));
-                        m_message = Messages.getMessage(SUSPEND_JOB_BYUSER, "Scan Name: "  + m_scanName);
-                        isSuspendedByUser = true;
-                    }
+					if ("by user".equals(description.toLowerCase())) {
+						m_progress.setStatus(new Message(Message.INFO, Messages.getMessage(SUSPEND_JOB_BYUSER, "Scan Name: "  + m_scanName)));
+						m_message = Messages.getMessage(SUSPEND_JOB_BYUSER, "Scan Name: "  + m_scanName);
+						isSuspendedByUser = true;
+					}
 				}
 				// If Scan is not Paused by User and we get Suspended state from ASE, Job status is set to FAILED to determine Scan has FAILED in Jenkins
 				if (!isSuspendedByUser) {
@@ -358,7 +359,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
             return null;
     }
 
-    private String getStatisticsStatus(String jobId) {
+	private String getStatisticsStatus(String jobId) {
 		IAuthenticationProvider authProvider = m_scanProvider.getAuthenticationProvider();
 		if(authProvider.isTokenExpired()) {
 			m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_LOGIN_EXPIRED)));
@@ -378,7 +379,7 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 					JSONObject reportPack = object.has("statistics") ? object.getJSONObject("statistics") : null;
 					String state = (reportPack != null && reportPack.has("status")) ? reportPack.getString("status") : null;
 					if (state != null) {
-//						return state.split("[ (]")[0];
+                    //  return state.split("[ (]")[0];
 						return state;
 					}
 				}

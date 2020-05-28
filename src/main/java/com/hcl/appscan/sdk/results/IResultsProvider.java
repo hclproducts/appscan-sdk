@@ -89,7 +89,7 @@ public interface IResultsProvider {
 	 */
 	public String getMessage();
 
-        /**
+	/**
 	 * Specifies the format to use for reports.
 	 * 
 	 * @param format The format of the report. 
