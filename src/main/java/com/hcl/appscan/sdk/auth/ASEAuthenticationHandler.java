@@ -1,5 +1,5 @@
 /**
- * © Copyright HCL Technologies Ltd. 2019. 
+ * © Copyright HCL Technologies Ltd. 2019,2020.
  * LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
  */
 
@@ -76,7 +76,7 @@ public class ASEAuthenticationHandler implements CoreConstants{
 	
 	public boolean isTokenExpired() {
 		boolean isExpired;
-		String request_url = m_authProvider.getServer() + ASE_API;
+		String request_url = m_authProvider.getServer() + ASE_CURRENTUSER_V2;
 		
 		Map<String, String> headers = m_authProvider.getAuthorizationHeader(false);
 		headers.put("Accept", "application/json"); //$NON-NLS-1$ //$NON-NLS-2$
