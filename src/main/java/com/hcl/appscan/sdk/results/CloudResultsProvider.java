@@ -141,7 +141,17 @@ public class CloudResultsProvider implements IResultsProvider, Serializable, Cor
 		m_progress = progress;
 		m_scanProvider.setProgress(progress);
 	}
-	
+
+	@Override
+	public String getScanServerUrl() {
+		return null;
+	}
+
+	@Override
+	public String getLabel() {
+		return null;
+	}
+
 	/**
 	 * Specifies the format to use for reports.
 	 * 
