@@ -91,7 +91,7 @@ public interface IResultsProvider {
 
 	/**
 	 * Gets Scan Server URL for the scheduled Scans.
-	 * @return A String containing URl of the Server.
+	 * @return A String containing URL of the Server.
 	 */
 	public String getScanServerUrl();
 
