@@ -43,16 +43,13 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 	private IProgress m_progress;
 	private String m_message;
 	private String m_scanName;
-	private String m_aseServerUrl;
-	private String m_label;
 
 	private int m_totalFindings;
 	private int m_highFindings;
 	private int m_mediumFindings;
 	private int m_lowFindings;
 	private int m_infoFindings;
-    public ASEResultsProvider(String scanId, String type, IScanServiceProvider provider, IProgress progress, String scanName,
-                              String aseServerUrl, String label) {
+    public ASEResultsProvider(String scanId, String type, IScanServiceProvider provider, IProgress progress, String scanName) {
         m_type = type;
 		m_scanId = scanId;
 		m_hasResults = false;
@@ -60,12 +57,6 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
 		m_progress = progress;
 		m_reportFormat = DEFAULT_REPORT_FORMAT;
 		m_scanName = scanName;
-		m_aseServerUrl = aseServerUrl;
-		m_label = label;
-    }
-
-    public ASEResultsProvider(String scanId, String type, IScanServiceProvider provider, IProgress progress, String scanName) {
-        this(scanId, type, provider, progress, scanName, null, null);
     }
     
     @Override
@@ -146,16 +137,6 @@ public class ASEResultsProvider implements IResultsProvider, Serializable, CoreC
     @Override
     public String getMessage() {
         return m_message;
-    }
-
-    @Override
-    public String getScanServerUrl() {
-        return m_aseServerUrl;
-    }
-
-    @Override
-    public String getLabel() {
-        return m_label;
     }
 
     @Override

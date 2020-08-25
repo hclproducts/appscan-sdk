@@ -90,18 +90,6 @@ public interface IResultsProvider {
 	public String getMessage();
 
 	/**
-	 * Gets Scan Server URL for the scheduled Scans.
-	 * @return A String containing URL of the Server.
-	 */
-	public String getScanServerUrl();
-
-	/**
-	 * Gets Label for the Server as Visible in Jenkins Job Page.
-	 * @return A String containing the name of the Server.
-	 */
-	public String getLabel();
-
-	/**
 	 * Specifies the format to use for reports.
 	 * 
 	 * @param format The format of the report. 

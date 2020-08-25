@@ -142,8 +142,5 @@ public interface CoreConstants {
     String ASE_CURRENTUSER_V2           = ASE_API + "/currentuser_v2";                           //$NON-NLS-1$
     String ASE_GET_FOLDER_ITEMS_STATISTICS	= ASE_API + "/folderitems/%s/statistics";			 //$NON-NLS-1$
 
-    // ASE Specific Scan URL
-    String ASE_SCAN_STATS               = "/Jobs/QuickScanStats.aspx?fiid=%s";                   //$NON-NLS-1$
-
-    String UNAUTHORIZED_ACTION          = "UNAUTHORIZED_ACTION";                                 //$NON-NLS-1$
+    String UNAUTHORIZED_ACTION			= "UNAUTHORIZED_ACTION";								 //$NON-NLS-1$
 }
