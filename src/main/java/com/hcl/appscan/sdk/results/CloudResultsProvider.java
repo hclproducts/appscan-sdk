@@ -141,7 +141,7 @@ public class CloudResultsProvider implements IResultsProvider, Serializable, Cor
 		m_progress = progress;
 		m_scanProvider.setProgress(progress);
 	}
-
+	
 	/**
 	 * Specifies the format to use for reports.
 	 * 
