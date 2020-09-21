@@ -12,7 +12,6 @@ import java.util.Locale;
 
 public class SystemUtil {
 
-	private static final String DEFAULT_SERVER = "https://cloud.appscan.com"; //$NON-NLS-1$
 	private static final String TIMESTAMP_FORMAT = "yyyy-MM-dd_HH-mm-ss"; //$NON-NLS-1$
 			
 	/** Gets a timestamp using the default format.
@@ -103,9 +102,16 @@ public class SystemUtil {
 	 * @return The server url.
 	 */
 	public static String getDefaultServer() {
-		setSystemProperties();
-		String server = System.getProperty("BLUEMIX_SERVER"); //$NON-NLS-1$
-		return server != null ? server : DEFAULT_SERVER;
+		return ServerUtil.getServerUrl();
+	}
+
+	/**
+	 * Gets the server url.
+	 * 
+	 * @return The server url.
+	 */
+	public static String getServer(String key) {
+		return ServerUtil.getServerUrl(key);
 	}
 	
 	/**

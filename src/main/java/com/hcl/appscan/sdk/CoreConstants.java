@@ -8,6 +8,8 @@ package com.hcl.appscan.sdk;
 
 public interface CoreConstants {
 
+	String DEFAULT_SERVER				= "https://cloud.appscan.com";							//$NON-NLS-1$
+	
 	String APP_ID						= "AppId";												//$NON-NLS-1$
 	String EMAIL_NOTIFICATION			= "EnableMailNotification";								//$NON-NLS-1$
 	String FILE_ID 						= "FileId"; 											//$NON-NLS-1$
@@ -66,6 +68,7 @@ public interface CoreConstants {
 	String API_KEY_PATH					= "/api/ideclientuilogin";								//$NON-NLS-1$
 	String API_REPORT_STATUS			= "/api/V2/Reports/%s";									//$NON-NLS-1$
 	String API_ISSUES_COUNT				= "/api/v2/Issues/CountBySeverity/%s/%s";				//$NON-NLS-1$
+	String API_REGIONS					= "/api/v2/Utils/Regions";								//$NON-NLS-1$
 
 	String DEFAULT_RESULT_NAME			= "asoc_results";										//$NON-NLS-1$
 	String SACLIENT_INSTALL_DIR			= "SAClientInstall";									//$NON-NLS-1$
@@ -92,6 +95,10 @@ public interface CoreConstants {
 	String UPLOADING_FILE				= "message.uploading.file";								//$NON-NLS-1$
 	String SUSPEND_JOB_BYUSER		    = "message.suspend.job.byuser";                         //$NON-NLS-1$
 
+	String REGIONS						= "Regions";											//$NON-NLS-1$
+	String DEFAULT_REGION				= "DefaultRegion";										//$NON-NLS-1$
+	String URL							= "Url";												//$NON-NLS-1$
+	
 	String ERROR_AUTHENTICATING			= "error.authenticating";								//$NON-NLS-1$
 	String ERROR_DOWNLOADING_CLIENT 	= "error.download.client";								//$NON-NLS-1$
 	String ERROR_GETTING_DETAILS		= "error.getting.details";								//$NON-NLS-1$
