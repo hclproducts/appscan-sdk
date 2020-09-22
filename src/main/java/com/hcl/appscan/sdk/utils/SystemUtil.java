@@ -111,6 +111,8 @@ public class SystemUtil {
 	 * @return The server url.
 	 */
 	public static String getServer(String key) {
+		// If the key is prefixed with a region, it will be separated with an '_' character.
+		key = key.contains("_") ? key.substring(0, key.indexOf("_")) : null; //$NON-NLS-1$
 		return ServerUtil.getServerUrl(key);
 	}
 	
