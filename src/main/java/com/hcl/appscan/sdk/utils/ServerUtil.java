@@ -20,10 +20,6 @@ public class ServerUtil {
 	private static String CURRENT_SERVER = getConfiguredServer();
 	private static Map<String, String> m_servers = null;
 	
-	public static boolean isHcl() {
-		return true;
-	}
-	
 	/**
 	 * Gets the target server. 
 	 * 
