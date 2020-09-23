@@ -1,3 +1,8 @@
+/**
+ * © Copyright HCL Technologies Ltd. 2020. 
+ * LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
+ */
+
 package com.hcl.appscan.sdk.utils;
 
 import java.io.IOException;
@@ -79,11 +84,6 @@ public class ServerUtil {
 		}
 	}
 	
-	/**
-	 * Gets the server as configured by the user via the -DBLUEMIX_SERVER JVM parameter. If this is not set, returns the default HCL server https://cloud.appscan.com
-	 * 
-	 * @return The server configured by the user or https://cloud.appscan.com.
-	 */
 	private static String getConfiguredServer() {
 		SystemUtil.setSystemProperties();
 		String server = System.getProperty("BLUEMIX_SERVER"); //$NON-NLS-1$
