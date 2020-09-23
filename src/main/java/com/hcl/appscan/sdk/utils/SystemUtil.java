@@ -107,6 +107,7 @@ public class SystemUtil {
 
 	/**
 	 * Gets the server url.
+	 * @param key The key to use for determining the server region.
 	 * 
 	 * @return The server url.
 	 */
