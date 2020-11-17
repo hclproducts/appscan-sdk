@@ -81,6 +81,14 @@ public class SASTScanManager implements IScanManager{
 		else
 			throw new AppScanException(Messages.getMessage("message.results.unavailable")); //$NON-NLS-1$
 	}
+
+	/**
+	 * Gets the scan id.
+	 * @return The scan id as a String, if one has been created. Otherwise null.
+	 */
+	public String getScanId() {
+		return m_scan == null ? null : m_scan.getScanId();
+	}
 	
 	private void run(IProgress progress,Map<String, String> properties, IScanServiceProvider provider) throws AppScanException {
 		try {
