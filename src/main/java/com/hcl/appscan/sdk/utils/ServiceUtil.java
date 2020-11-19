@@ -17,6 +17,7 @@ import org.apache.wink.json4j.JSONException;
 import org.apache.wink.json4j.JSONObject;
 
 import com.hcl.appscan.sdk.CoreConstants;
+import com.hcl.appscan.sdk.auth.IAuthenticationProvider;
 import com.hcl.appscan.sdk.http.HttpClient;
 import com.hcl.appscan.sdk.http.HttpResponse;
 
@@ -93,5 +94,48 @@ public class ServiceUtil implements CoreConstants {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * Checks if the given url is valid for scanning.
+	 * 
+	 * @param url The url to test.
+	 * @param provider The IAuthenticationProvider for authentication.
+	 * @return True if the url is valid. False is returned if the url is not valid, the request fails, or an exception occurs.
+	 */
+	public static boolean isValidUrl(String url, IAuthenticationProvider provider) {
+		return isValidUrl(url, provider, Proxy.NO_PROXY);
+	}
+	
+	/**
+	 * Checks if the given url is valid for scanning.
+	 * 
+	 * @param url The url to test.
+	 * @param provider The IAuthenticationProvider for authentication.
+	 * @param proxy The proxy to use for the connection.
+	 * @return True if the url is valid. False is returned if the url is not valid, the request fails, or an exception occurs.
+	 */
+	public static boolean isValidUrl(String url, IAuthenticationProvider provider, Proxy proxy) {
+		String request_url = provider.getServer() + API_IS_VALID_URL;
+
+		try {
+			JSONObject body = new JSONObject();
+			body.put(URL, url);
+
+			HttpClient client = new HttpClient(proxy);
+			HttpResponse response = client.post(request_url, provider.getAuthorizationHeader(false), body.toString());
+
+			if (response.isSuccess()) {
+				JSONArtifact responseContent = response.getResponseBodyAsJSON();
+				if (responseContent != null) {
+					JSONObject object = (JSONObject) responseContent;
+					return object.getBoolean(IS_VALID);
+				}
+			}
+		} catch (IOException | JSONException e) {
+			// Ignore and return false.
+		}
+		
+		return false;
 	}
 }

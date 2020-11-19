@@ -28,7 +28,8 @@ public interface CoreConstants {
 	String OPEN_SOURCE_ONLY             = "openSourceOnly";                                     //$NON-NLS-1$
 	String VERSION_NUMBER				= "VersionNumber";										//$NON-NLS-1$
 	String USER_MESSAGE					= "UserMessage";										//$NON-NLS-1$
-
+	String IS_VALID						= "IsValid";											//$NON-NLS-1$
+	
 	String BINDING_ID					= "Bindingid";											//$NON-NLS-1$
 	String KEY_ID						= "KeyId";												//$NON-NLS-1$
 	String KEY_SECRET					= "KeySecret";											//$NON-NLS-1$
@@ -69,6 +70,7 @@ public interface CoreConstants {
 	String API_REPORT_STATUS			= "/api/V2/Reports/%s";									//$NON-NLS-1$
 	String API_ISSUES_COUNT				= "/api/v2/Issues/CountBySeverity/%s/%s";				//$NON-NLS-1$
 	String API_REGIONS					= "/api/v2/Utils/Regions";								//$NON-NLS-1$
+	String API_IS_VALID_URL				= "/api/v2/Scans/IsValidUrl";							//$NON-NLS-1$
 
 	String DEFAULT_RESULT_NAME			= "asoc_results";										//$NON-NLS-1$
 	String SACLIENT_INSTALL_DIR			= "SAClientInstall";									//$NON-NLS-1$
