@@ -36,4 +36,10 @@ public interface ICppTarget extends ISASTTarget {
 	 * @return The version as a String.
 	 */
 	String getVersion();
+	
+	/**
+	 * Gets the platform architecture of the target.
+	 * @return The platform architecture as a String.
+	 */
+	String getPlatformArch();
 }

@@ -40,6 +40,7 @@ public interface IModelXMLConstants {
 	String A_SOURCES			    = "sources";			    //$NON-NLS-1$
 	String A_VS_VERSION			    = "vs_version";			    //$NON-NLS-1$
 	String A_INTERMEDIATE_OUTPUT_PATH = "intermediate_output_path"; //$NON-NLS-1$
+	String A_PLATFORM_ARCH			= "platform_architecture";	//$NON-NLS-1$
 	
 	//.NET
 	String A_REFERENCES 			= "references";				//$NON-NLS-1$
