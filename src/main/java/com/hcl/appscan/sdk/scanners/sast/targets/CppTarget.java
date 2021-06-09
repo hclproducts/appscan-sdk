@@ -21,6 +21,7 @@ public abstract class CppTarget extends DefaultTarget implements ICppTarget {
 		buildInfos.put(IModelXMLConstants.A_SOURCES, getSourceFiles());
 		buildInfos.put(IModelXMLConstants.A_VS_VERSION, getVersion());
 		buildInfos.put(IModelXMLConstants.A_PLATFORM_ARCH, getPlatformArch());
+		buildInfos.put(IModelXMLConstants.A_INTERMEDIATE_OUTPUT_PATH, getIntermediateOutputPath());
 		return buildInfos;
 	}
 }

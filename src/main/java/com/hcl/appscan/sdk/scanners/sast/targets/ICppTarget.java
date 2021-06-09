@@ -42,4 +42,10 @@ public interface ICppTarget extends ISASTTarget {
 	 * @return The platform architecture as a String.
 	 */
 	String getPlatformArch();
+	
+	/**
+	 * Gets the intermediate output path of the target.
+	 * @return The intermediate output path as a String.
+	 */
+	String getIntermediateOutputPath();
 }
