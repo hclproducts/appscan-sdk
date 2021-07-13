@@ -106,31 +106,44 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
 	
 	@Override
 	public JSONObject getScanDetails(String scanId) throws IOException, JSONException {
-		if(loginExpired())
-			return null;
-		
 		String request_url = m_authProvider.getServer() + String.format(API_BASIC_DETAILS, scanId);
 		Map<String, String> request_headers = m_authProvider.getAuthorizationHeader(true);
 		
 		HttpClient client = new HttpClient(m_authProvider.getProxy());
-		HttpResponse response = client.get(request_url, request_headers, null);
-		
-		if (response.getResponseCode() == HttpsURLConnection.HTTP_OK || response.getResponseCode() == HttpsURLConnection.HTTP_CREATED)
-			return (JSONObject) response.getResponseBodyAsJSON();
-		else if (response.getResponseCode() != HttpsURLConnection.HTTP_BAD_REQUEST) {
-			JSONArtifact json = response.getResponseBodyAsJSON();
-			if (json != null && ((JSONObject)json).has(MESSAGE))
-				m_progress.setStatus(new Message(Message.ERROR, ((JSONObject)json).getString(MESSAGE)));
-			if (response.getResponseCode() == HttpsURLConnection.HTTP_FORBIDDEN && json != null &&
-					((JSONObject)json).has(KEY) && ((JSONObject) json).get(KEY).equals(UNAUTHORIZED_ACTION))
-				return (JSONObject) json;
-		}
+                int requestCounter=0;  
+                try {
+                    do{
+                        if(loginExpired())
+                            return null;
+                        HttpResponse response = client.get(request_url, request_headers, null);
 
-		if (response.getResponseCode() == HttpsURLConnection.HTTP_BAD_REQUEST)
-			m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_INVALID_JOB_ID, scanId)));
-		
+                        if (response.getResponseCode() == HttpsURLConnection.HTTP_OK || response.getResponseCode() == HttpsURLConnection.HTTP_CREATED)
+                                return (JSONObject) response.getResponseBodyAsJSON();
+                        else if (response.getResponseCode() == HttpsURLConnection.HTTP_BAD_REQUEST){
+                                m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_INVALID_JOB_ID, scanId)));
+                                return null;
+                        }
+                        else if (response.getResponseCode() == -1){ //If the server is not reachable
+                             Thread.sleep(60000); //Thread will sleep for 60000 milliseconds = 60 Sec = 1 Min
+                             requestCounter++; 
+                        }
+                        else if (response.getResponseCode() != HttpsURLConnection.HTTP_BAD_REQUEST) {
+                                JSONArtifact json = response.getResponseBodyAsJSON();
+                                if (json != null && ((JSONObject)json).has(MESSAGE))
+                                        m_progress.setStatus(new Message(Message.ERROR, ((JSONObject)json).getString(MESSAGE)));
+                                if (response.getResponseCode() == HttpsURLConnection.HTTP_FORBIDDEN && json != null &&
+                                                ((JSONObject)json).has(KEY) && ((JSONObject) json).get(KEY).equals(UNAUTHORIZED_ACTION))
+                                        return (JSONObject) json;
+                                return null;
+                        }
+                    }
+                    while(requestCounter<=10); // How many times it should retry the connection before setting the status.
+                } catch (IOException |JSONException | InterruptedException ex) {
+                    m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_GETTING_RESULT, ex.getLocalizedMessage())));
+                }
+                m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(SERVER_UNAVAILABLE)));
 		return null;
-	}
+            }
 	
         @Override
 	public JSONArray getNonCompliantIssues(String scanId) throws IOException, JSONException {
