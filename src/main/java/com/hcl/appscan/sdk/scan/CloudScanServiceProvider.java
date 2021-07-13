@@ -1,6 +1,6 @@
 /**
  * © Copyright IBM Corporation 2016.
- * © Copyright HCL Technologies Ltd. 2017,2020.
+ * © Copyright HCL Technologies Ltd. 2017,2020,2021.
  * LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
  */
 
@@ -143,7 +143,7 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
                 }
                 m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(SERVER_UNAVAILABLE)));
 		return null;
-            }
+        }
 	
         @Override
 	public JSONArray getNonCompliantIssues(String scanId) throws IOException, JSONException {

@@ -1,6 +1,6 @@
 /**
  * © Copyright IBM Corporation 2016.
- * © Copyright HCL Technologies Ltd. 2017,2020.
+ * © Copyright HCL Technologies Ltd. 2017,2020,2021.
  * LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
  */
 
@@ -152,5 +152,5 @@ public interface CoreConstants {
     String ASE_GET_FOLDER_ITEMS_STATISTICS	= ASE_API + "/folderitems/%s/statistics";			 //$NON-NLS-1$
 
     String UNAUTHORIZED_ACTION			= "UNAUTHORIZED_ACTION";								 //$NON-NLS-1$
-    String SERVER_UNAVAILABLE			= "error.server_unavailable";								 //$NON-NLS-1$
+    String SERVER_UNAVAILABLE			= "error.server.unavailable";								 //$NON-NLS-1$
 }
