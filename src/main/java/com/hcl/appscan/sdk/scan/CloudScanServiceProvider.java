@@ -129,7 +129,7 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
                         }
                         else if (response.getResponseCode() != HttpsURLConnection.HTTP_BAD_REQUEST) {
                                 JSONArtifact json = response.getResponseBodyAsJSON();
-                                if (json != null && ((JSONObject)json).has(MESSAGE))
+                                if (json != null && ((JSONObject)json).has(MESSAGE)) // If the scan is cancelled from the ASoC - Message: Wrong scan Id or you do not have access permission to the containing application.
                                         m_progress.setStatus(new Message(Message.ERROR, ((JSONObject)json).getString(MESSAGE)));
                                 if (response.getResponseCode() == HttpsURLConnection.HTTP_FORBIDDEN && json != null &&
                                                 ((JSONObject)json).has(KEY) && ((JSONObject) json).get(KEY).equals(UNAUTHORIZED_ACTION))
@@ -141,8 +141,8 @@ public class CloudScanServiceProvider implements IScanServiceProvider, Serializa
                 } catch (IOException |JSONException | InterruptedException ex) {
                     m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(ERROR_GETTING_RESULT, ex.getLocalizedMessage())));
                 }
-                m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(SERVER_UNAVAILABLE)));
-		return null;
+                m_progress.setStatus(new Message(Message.ERROR, Messages.getMessage(SERVER_UNAVAILABLE, m_authProvider.getServer())));
+                return new JSONObject().put(STATUS,UNSTABLE);
         }
 	
         @Override
