@@ -1,6 +1,6 @@
 /**
  * © Copyright IBM Corporation 2016.
- * © Copyright HCL Technologies Ltd. 2017. 
+ * © Copyright HCL Technologies Ltd. 2017,2021. 
  * LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
  */
 
@@ -17,5 +17,5 @@ public interface ScanConstants {
 	String ERROR_RUNNING_SCAN		= "error.running.scan";			//$NON-NLS-1$
 	String SCAN_FAILED				= "error.scan.failed";			//$NON-NLS-1$
 	String TARGET_INVALID			= "error.target.invalid";		//$NON-NLS-1$
-        String SERVER_UNAVAILABLE		= "error.server.unavailable";
+        String SERVER_UNAVAILABLE		= "error.server.unavailable";           //$NON-NLS-1$
 }
