@@ -1,5 +1,5 @@
 /**
- * © Copyright HCL Technologies Ltd. 2018,2020.
+ * © Copyright HCL Technologies Ltd. 2018,2020,2021.
  */
 package com.hcl.appscan.sdk.results;
 
@@ -43,6 +43,9 @@ public class NonCompliantIssuesResultProvider extends CloudResultsProvider {
 			} else if (obj.has(KEY) && obj.get(KEY).equals(UNAUTHORIZED_ACTION)) {
 				m_status = FAILED;
 				return;
+			} else if (obj.has(STATUS) && obj.get(STATUS).equals(UNSTABLE)) {
+                            m_status = UNSTABLE;
+                            return;
 			}
 
 			obj = (JSONObject) obj.get(LATEST_EXECUTION);

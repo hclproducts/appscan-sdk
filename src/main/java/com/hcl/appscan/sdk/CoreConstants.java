@@ -1,6 +1,6 @@
 /**
  * © Copyright IBM Corporation 2016.
- * © Copyright HCL Technologies Ltd. 2017,2020.
+ * © Copyright HCL Technologies Ltd. 2017,2020,2021.
  * LICENSE: Apache License, Version 2.0 https://www.apache.org/licenses/LICENSE-2.0
  */
 
@@ -84,7 +84,8 @@ public interface CoreConstants {
 	String PAUSING						= "Pausing";											//$NON-NLS-1$
 	String PAUSED						= "Paused";												//$NON-NLS-1$
 	String SUSPENDED					= "Suspended";											//$NON-NLS-1$
-
+        String UNSTABLE                                         = "Unstable";                                                                                   //$NON-NLS-1$
+        
 	String TOTAL_ISSUES					= "NIssuesFound";										//$NON-NLS-1$
 	String HIGH_ISSUES					= "NHighIssues";										//$NON-NLS-1$
 	String MEDIUM_ISSUES				= "NMediumIssues";										//$NON-NLS-1$
